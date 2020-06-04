@@ -7,8 +7,8 @@ There are two notebooks both doing the same task.
  - In *Joke Generation.ipynb* I have used the pretrained HuggingFace library's GPT2-LM model and we only fine tune this model on the jokes dataset. Since we are using transfer learning and are fine tuning the weights it takes only around 4 epochs to get good results.
  
  - In *Joke_Completion_Pure_TF2_Implementation.ipynb* I have created the complete transformer model from scratch. Since it begins with random initial weights it takes around 10 epochs to get decent result from this model. 
- 
 <br/>
+
 ### Data
 
 For our task we will use the dataset provided on [Kaggle]( https://www.kaggle.com/abhinavmoudgil95/short-jokes). It is a csv containing over 200000 Short Jokes scrapped from Reddit. 
@@ -27,8 +27,14 @@ Code for this can be found in the notebook `Joke_Completion_Pure_TF2_Implementat
 I first built a tokenizer for our dataset and tokenized the strings using it. Then, built a layer for `Positional Encodings` and `MultiHeadAttention`. Also, I used a `Lambda layer` for creating the suitable masks for our data. 
 
 Then I created on building a single `decoder layer` for our decoder. The following is the architecture of a single decoder layer.
+
 ![Decoder Layer Architecture](assets/decoder_layer.png)
+
+<br/>
 Once we have the function providing a `decoder layer` ready I built a function `decoder` that accepts a the input tokens and mask as input, along with a param of number of layer of decoder we need and return a model for the same. For our task we will be using a language decoder with 8 decoder layers. The following is the architecture of the decoder.
+
 ![Decoder Architecture](assets/decoder.png)
+
 For the final `transformer` model it takes the input tokens, pass it through the lamda layer to get the mask and pass both the mask and tokens to our Language Decoder. Following is the architecture of our final model.
+
 ![Decoder Layer Architecture](assets/transformer.png)
